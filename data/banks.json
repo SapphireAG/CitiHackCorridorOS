@@ -1,0 +1,8 @@
+{
+  "_label": "SYNTHETIC",
+  "banks": [
+    { "bankId": "sg-bank-01", "name": "Synthetic Marina Bay Bank", "country": "SG", "tokenizedNetworkMember": true },
+    { "bankId": "sg-bank-02", "name": "Synthetic Raffles Trust Bank", "country": "SG", "tokenizedNetworkMember": false },
+    { "bankId": "in-ad-bank-01", "name": "Synthetic Konkan AD Bank", "country": "IN", "tokenizedNetworkMember": true, "adCategory": "I" }
+  ]
+}

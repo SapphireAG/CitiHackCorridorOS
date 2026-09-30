@@ -1,0 +1,43 @@
+{
+  "name": "corridoros",
+  "private": true,
+  "version": "0.1.0",
+  "description": "CorridorOS — one export invoice, one programmable cross-border payment workflow (simulated).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "tsc -b --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "scenario": "tsx scripts/scenario-cli.ts",
+    "audit:verify": "tsx packages/audit/src/verify-cli.ts",
+    "lint": "eslint . --ext .ts"
+  },
+  "dependencies": {
+    "@corridoros/audit": "workspace:*",
+    "@corridoros/compliance": "workspace:*",
+    "@corridoros/core": "workspace:*",
+    "@corridoros/domain": "workspace:*",
+    "@corridoros/ledger": "workspace:*",
+    "@corridoros/optimizer": "workspace:*",
+    "@corridoros/rates-sim": "workspace:*",
+    "@corridoros/recon": "workspace:*",
+    "@corridoros/routes": "workspace:*",
+    "@corridoros/workflow": "workspace:*",
+    "yaml": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "@vitest/coverage-v8": "^2.1.8",
+    "eslint": "^8.57.1",
+    "fast-check": "^3.23.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

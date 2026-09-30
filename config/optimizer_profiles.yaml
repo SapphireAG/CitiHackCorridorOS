@@ -1,0 +1,30 @@
+# Optimizer weighting profiles. Weights apply to normalized (0-1, higher-is-better) metrics:
+# costScore (inverse of allInCostBps), timeScore (inverse of timeToLanded), liquidityCertainty,
+# complianceScore (inverse of complianceRisk). Weights need not sum to 1; the optimizer normalizes.
+illustrative: true
+source: "Illustrative weighting profiles chosen for the demo; not derived from any bank's treasury policy."
+as_of: "2026-01-01"
+
+profiles:
+  balanced:
+    cost: 0.3
+    time: 0.3
+    liquidity: 0.2
+    compliance: 0.2
+  cheapest:
+    cost: 0.7
+    time: 0.1
+    liquidity: 0.1
+    compliance: 0.1
+  fastest:
+    cost: 0.1
+    time: 0.7
+    liquidity: 0.1
+    compliance: 0.1
+  certain:
+    cost: 0.15
+    time: 0.15
+    liquidity: 0.5
+    compliance: 0.2
+
+default_profile: "balanced"

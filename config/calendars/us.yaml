@@ -1,0 +1,23 @@
+# US: only relevant when a corridor route has a USD correspondent leg.
+# illustrative: true — a representative subset of Federal Reserve holidays.
+country: US
+timezone: "America/New_York"
+utc_offset_minutes: -300 # -05:00, FIXED offset (EST). Simplification: this simulation does not
+  # model US daylight-saving transitions — a known limitation for a USD correspondent leg.
+weekend_days: [6, 0]
+illustrative: true
+source: "Representative subset of commonly observed US federal holidays; not an official Federal Reserve calendar."
+as_of: "2026-01-01"
+holidays:
+  - date: "2026-01-01"
+    name: "New Year's Day"
+  - date: "2026-07-04"
+    name: "Independence Day (observed, sample)"
+  - date: "2026-11-26"
+    name: "Thanksgiving (sample)"
+  - date: "2026-12-25"
+    name: "Christmas Day"
+cutoffs:
+  usd_correspondent_processing:
+    local_time: "18:00"
+    note: "Illustrative USD correspondent cut-off for a SGD->USD->INR hop."

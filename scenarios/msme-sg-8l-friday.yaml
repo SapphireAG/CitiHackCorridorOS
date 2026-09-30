@@ -1,0 +1,27 @@
+# CLAUDE.md §13 — expected: TOKENIZED wins on time and net INR; correspondent lands after the
+# weekend. Submitted Friday 19:00 IST: past the SG outward-payment cut-off (19:00 SGT = 21:30
+# IST), so every correspondent hop rolls to Monday; tokenized only waits out its single IN
+# payout cut-off (17:00 IST), landing Monday morning while correspondent lands Monday afternoon.
+name: "msme-sg-8l-friday"
+description: "₹8,00,000-equivalent SGD invoice submitted Friday 19:00 IST."
+submitted_at: "2026-01-02T13:30:00.000Z" # Friday 2026-01-02, 19:00 IST
+
+invoice:
+  invoice_number: "INV-FRI-0001"
+  exporter_id: "exp-0001"
+  buyer_id: "buy-0001"
+  currency: "SGD"
+  total_minor: "1267000" # SGD 12,670.00 — approx. ₹8,00,000 at the seeded mid rate
+  line_items:
+    - description: "Handcrafted wooden furniture set (SYNTHETIC)"
+      hs_code: "9403.60"
+      quantity: 1
+      unit_price_minor: "1267000"
+  invoice_date: "2025-12-28"
+  shipment_date: "2025-12-30"
+  purpose: "export_of_goods"
+
+expect:
+  final_state: "AUDIT_SEALED"
+  winning_route: "TOKENIZED"
+  recon_matched: true

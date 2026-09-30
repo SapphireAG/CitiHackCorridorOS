@@ -1,0 +1,53 @@
+# Compliance rules as data. Every rule has an id, version and severity (BLOCK | REVIEW | INFO).
+# This is a simulated compliance engine for a hackathon demo — not a real sanctions/KYB screen.
+illustrative: true
+source: "Rule shapes modeled on publicly described KYB/sanctions/goods-screening practice at a high level; thresholds and lists below are synthetic/demo-only, not a real screening vendor's output."
+as_of: "2026-01-01"
+
+rules:
+  - id: "invoice.integrity.required_fields"
+    version: 1
+    severity: BLOCK
+    description: "Invoice must have invoice_number, exporter, buyer, goods description, currency, amount and totals that add up."
+
+  - id: "invoice.integrity.no_duplicate"
+    version: 1
+    severity: BLOCK
+    description: "Invoice number must not already exist for this exporter."
+
+  - id: "exporter.kyb.format_and_registry"
+    version: 1
+    severity: BLOCK
+    description: "Exporter IEC, GSTIN and PAN must pass format validation and exist in the seeded synthetic registry, with a verified bank account."
+
+  - id: "buyer.kyb.registry"
+    version: 1
+    severity: BLOCK
+    description: "Buyer entity must exist in the seeded synthetic SG registry."
+
+  - id: "sanctions.fuzzy_match"
+    version: 1
+    severity: REVIEW
+    description: "Exporter and buyer names are fuzzy-matched against data/sanctions_sample.json. This is a bundled sample list for demo purposes only, not a real screening service."
+    match_threshold: 0.82
+
+  - id: "goods.restricted_dual_use"
+    version: 1
+    severity: REVIEW
+    description: "HS code checked against a sample restricted/dual-use list in data/restricted_hs_codes.json."
+
+  - id: "purpose_code.assignment"
+    version: 1
+    severity: INFO
+    description: "Purpose code assigned from config/regulatory.yaml (export of goods / advance receipt), marked for verification."
+
+  - id: "realisation.tracking"
+    version: 1
+    severity: INFO
+    description: "Realisation due date computed from invoice/shipping dates plus the configured realisation period. unverified until confirmed against the current RBI rule — see config/regulatory.yaml."
+
+  - id: "velocity.aml_heuristics"
+    version: 1
+    severity: REVIEW
+    description: "Exporter volume vs. history and round-amount patterns flagged for review only, never a block."
+    round_amount_threshold_minor: "100000000" # flag invoices that are an exact multiple of ₹10,00,000

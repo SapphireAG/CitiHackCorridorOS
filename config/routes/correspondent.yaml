@@ -1,0 +1,83 @@
+# CORRESPONDENT route: fee, spread, timing and cut-off parameters.
+# illustrative: true — every number here is a plausible, round illustrative figure for the
+# demo. None of it is a quoted bank rate. Never hard-code these in route logic; read this file.
+illustrative: true
+source: "Illustrative figures loosely modeled on publicly described correspondent-banking cost ranges (multiple intermediary/lifting fees, ~0.5-3% aggregate FX spread). Not a quote from any bank."
+as_of: "2026-01-01"
+
+paths:
+  - id: "direct_sgd_nostro"
+    label: "Direct SGD nostro -> INR AD bank"
+    hops:
+      - id: "buyer_bank_outward"
+        from: "SGD"
+        to: "SGD"
+        fixed_fee_minor: 2500 # SGD 25.00
+        percentage_fee_bps: 0
+        deducted_from_principal: true
+        processing_minutes: 30
+        calendar: "sg"
+        cutoff_key: "outward_payment_initiation"
+      - id: "correspondent_lift"
+        from: "SGD"
+        to: "SGD"
+        fixed_fee_minor: 1500 # SGD 15.00 "lifting fee"
+        percentage_fee_bps: 0
+        deducted_from_principal: true
+        processing_minutes: 180
+        calendar: "sg"
+        cutoff_key: null
+      - id: "ad_bank_inward_fx_credit"
+        from: "SGD"
+        to: "INR"
+        fixed_fee_minor: 0
+        percentage_fee_bps: 15 # 0.15% handling fee on converted INR
+        deducted_from_principal: false
+        fx_spread_bps: 180 # bank buy-rate spread vs mid
+        processing_minutes: 240
+        calendar: "in"
+        cutoff_key: "inr_credit_processing"
+  - id: "usd_correspondent"
+    label: "SGD -> USD correspondent -> INR AD bank"
+    hops:
+      - id: "buyer_bank_outward"
+        from: "SGD"
+        to: "SGD"
+        fixed_fee_minor: 2500
+        percentage_fee_bps: 0
+        deducted_from_principal: true
+        processing_minutes: 30
+        calendar: "sg"
+        cutoff_key: "outward_payment_initiation"
+      - id: "usd_correspondent_hop"
+        from: "SGD"
+        to: "USD"
+        fixed_fee_minor: 2000 # USD 20.00 intermediary deduction
+        percentage_fee_bps: 5
+        deducted_from_principal: true
+        fx_spread_bps: 60
+        processing_minutes: 300
+        calendar: "us"
+        cutoff_key: "usd_correspondent_processing"
+      - id: "ad_bank_inward_fx_credit"
+        from: "USD"
+        to: "INR"
+        fixed_fee_minor: 0
+        percentage_fee_bps: 15
+        deducted_from_principal: false
+        fx_spread_bps: 150
+        processing_minutes: 240
+        calendar: "in"
+        cutoff_key: "inr_credit_processing"
+
+liquidity_certainty: 0.97 # correspondent banking liquidity modeled as near-certain, config-fixed
+quote_validity_minutes: 30
+
+active_path_id: "direct_sgd_nostro" # this demo's quote() only exercises this path; usd_correspondent
+  # is kept in config as an illustrative alternative for future extension.
+
+failure_injection_modes:
+  - "return"
+  - "delay"
+  - "intermediary_deduction"
+  - "missing_remittance_info"

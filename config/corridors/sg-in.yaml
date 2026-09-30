@@ -1,0 +1,27 @@
+# Corridor definition: SG -> IN, SGD -> INR, export-proceeds direction.
+# illustrative: true — corridor shape (participants, legs) is modeled from public descriptions
+# of correspondent banking and tokenized-deposit pilots; it is not a live bank product.
+id: "SG->IN/SGD->INR"
+illustrative: true
+source: "Illustrative corridor modeled on publicly described correspondent banking and bank-tokenized-deposit pilot patterns (e.g. Citi Token Services, Swift x Sui interoperability work). Not a real bank product."
+as_of: "2026-01-01"
+origin:
+  country: SG
+  currency: SGD
+destination:
+  country: IN
+  currency: INR
+supported_routes:
+  - CORRESPONDENT
+  - TOKENIZED
+buyer_bank_examples: # SYNTHETIC — fictional banks used only in fixtures/scenarios
+  - id: "sg-bank-01"
+    name: "Synthetic Marina Bay Bank"
+    country: SG
+  - id: "sg-bank-02"
+    name: "Synthetic Raffles Trust Bank"
+    country: SG
+exporter_bank_examples: # SYNTHETIC — AD Category-I equivalent, fictional
+  - id: "in-ad-bank-01"
+    name: "Synthetic Konkan AD Bank"
+    country: IN

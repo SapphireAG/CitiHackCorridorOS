@@ -1,0 +1,35 @@
+# CLAUDE.md §13 — expected: Recon flags short payment and names the deducting hop.
+# Buyer's bank is not a tokenized-network member (forces CORRESPONDENT), and an
+# intermediary_deduction failure injection takes an unexpected extra SGD 500.00 at the
+# "correspondent_lift" hop — settle() reports the actual landed amount, which is less than the
+# quote promised, and reconcile() flags SHORT_PAYMENT naming that hop.
+name: "msme-sg-8l-short-payment"
+description: "Correspondent route with an intermediary deduction."
+submitted_at: "2026-01-06T05:30:00.000Z" # Tuesday 2026-01-06, 11:00 IST
+
+invoice:
+  invoice_number: "INV-SHORT-0001"
+  exporter_id: "exp-0001"
+  buyer_id: "buy-0002" # forces CORRESPONDENT (bank not a tokenized-network member)
+  currency: "SGD"
+  total_minor: "1267000"
+  line_items:
+    - description: "Handcrafted wooden furniture set (SYNTHETIC)"
+      hs_code: "9403.60"
+      quantity: 1
+      unit_price_minor: "1267000"
+  invoice_date: "2026-01-01"
+  shipment_date: "2026-01-03"
+  purpose: "export_of_goods"
+
+failure_injection:
+  CORRESPONDENT:
+    mode: "intermediary_deduction"
+    hopId: "correspondent_lift"
+    extraFeeMinor: "50000" # SGD 500.00 unexpected extra deduction at this hop
+
+expect:
+  final_state: "AUDIT_SEALED"
+  winning_route: "CORRESPONDENT"
+  recon_matched: false
+  recon_break_type: "SHORT_PAYMENT"

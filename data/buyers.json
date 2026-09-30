@@ -1,0 +1,27 @@
+{
+  "_label": "SYNTHETIC",
+  "buyers": [
+    {
+      "buyerId": "buy-0001",
+      "name": "Synthetic Sentosa Trading Pte Ltd",
+      "country": "SG",
+      "bankId": "sg-bank-01",
+      "registered": true
+    },
+    {
+      "buyerId": "buy-0002",
+      "name": "Synthetic Jurong Import Pte Ltd",
+      "country": "SG",
+      "bankId": "sg-bank-02",
+      "registered": true
+    },
+    {
+      "buyerId": "buy-0099",
+      "name": "Suspicious Review Holdings Pte Ltd",
+      "country": "SG",
+      "bankId": "sg-bank-01",
+      "registered": true,
+      "_note": "Deliberately name-similar to a sample sanctions entry, for the sanctions-review scenario."
+    }
+  ]
+}

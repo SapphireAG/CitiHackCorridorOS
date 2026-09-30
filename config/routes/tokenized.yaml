@@ -1,0 +1,53 @@
+# TOKENIZED route: bank-issued tokenized deposits (tSGD/tINR), atomic PvP swap, then INR payout.
+# illustrative: true — every number is an illustrative demo figure, not a quoted bank/product rate.
+# Guardrail (CLAUDE.md §2.1): this models bank-issued tokenized deposits on a permissioned ledger,
+# never a public stablecoin or crypto asset, and always lands as an INR credit via an AD bank.
+illustrative: true
+source: "Illustrative figures loosely modeled on publicly described bank tokenized-deposit / wholesale settlement pilots (e.g. Citi Token Services). Not a quote from any bank or network."
+as_of: "2026-01-01"
+
+network:
+  members:
+    - bank_id: "sg-bank-01" # Synthetic Marina Bay Bank — network member
+    - bank_id: "in-ad-bank-01" # Synthetic Konkan AD Bank — network member
+  # sg-bank-02 (Synthetic Raffles Trust Bank) is intentionally NOT a member, for the
+  # msme-sg-8l-bank-not-on-network scenario.
+
+per_transaction_limit_minor:
+  currency: "SGD"
+  amount: "10000000" # SGD 100,000.00 ceiling per single PvP swap
+
+liquidity_pool:
+  depth_minor:
+    currency: "SGD"
+    amount: "600000000" # SGD 6,000,000.00 — sized so a typical single-invoice order clears
+      # comfortably within max_slippage_bps. The "thin pool" scenario overrides this down.
+  max_slippage_bps: 50
+  # Simplified linear slippage model (illustrative, not a real AMM curve):
+  #   impliedSlippageBps = orderSizeMinor * 10000 / poolDepthMinor
+  # eligible iff impliedSlippageBps <= max_slippage_bps.
+
+quote_validity_minutes: 15
+
+fees:
+  swap_fee_bps: 8 # atomic PvP swap fee, charged in tSGD leg
+  payout_fee_minor: 0 # no separate AD-bank payout fee modeled
+
+fx_spread_bps: 25 # PvP swap spread vs mid — materially tighter than correspondent banking
+
+timing:
+  ledger_settlement_minutes: 5 # tSGD/tINR PvP swap itself is near-instant, 24/7
+  inr_payout:
+    # The payout leg is NOT instant even though the ledger is 24/7: the AD bank still redeems
+    # tINR into a real INR credit inside its own processing window and cut-off.
+    processing_minutes: 90
+    calendar: "in"
+    cutoff_key: "inr_credit_processing"
+
+liquidity_certainty_formula: "1 - min(1, order_size / pool_depth)"
+
+failure_injection_modes:
+  - "insufficient_liquidity"
+  - "participant_offline"
+  - "ledger_reject"
+  - "payout_delay"

@@ -1,0 +1,26 @@
+# Regulatory facts. Every entry below is marked unverified: true because we have not confirmed
+# it against a primary RBI/DGFT source at the time of writing. Do not present these as current law.
+# TODO(reg): confirm each entry against the current RBI Master Direction / FEMA regulations before
+# this project is used for anything beyond a hackathon demo.
+
+purpose_codes:
+  export_of_goods:
+    code: "P0102"
+    label: "Export of goods - advance/receipt against goods"
+    unverified: true
+  advance_receipt:
+    code: "P0103"
+    label: "Advance receipt against export of goods"
+    unverified: true
+
+realisation_period:
+  export_proceeds:
+    months: 9
+    description: "Period within which export proceeds must be realised and repatriated, per RBI FEMA export regulations."
+    unverified: true
+    as_of: "2026-01-01"
+
+ad_category:
+  label: "Authorised Dealer Category-I bank"
+  description: "Only an AD Category-I bank (or equivalent) may credit export proceeds to the exporter's account, for both simulated routes."
+  unverified: false # this is a structural guardrail (CLAUDE.md §2.1), not a specific figure

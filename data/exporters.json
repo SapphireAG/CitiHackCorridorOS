@@ -1,0 +1,15 @@
+{
+  "_label": "SYNTHETIC",
+  "exporters": [
+    {
+      "exporterId": "exp-0001",
+      "name": "Synthetic Konkan Handicrafts Exports Pvt Ltd",
+      "iec": "SYNIEC0001",
+      "gstin": "27SYNAB1234C1ZP",
+      "pan": "SYNAB1234C",
+      "bankAccountId": "in-ad-bank-01/acct-0001",
+      "country": "IN",
+      "verified": true
+    }
+  ]
+}

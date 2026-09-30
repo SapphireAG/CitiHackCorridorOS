@@ -1,0 +1,23 @@
+# India: business days, sample public holidays, and bank cut-off times (local IST).
+# illustrative: true — a representative subset of holidays for demo purposes, not the
+# authoritative RBI/bank holiday list for any particular year.
+country: IN
+timezone: "Asia/Kolkata"
+utc_offset_minutes: 330 # +05:30, fixed offset — IST does not observe DST
+weekend_days: [6, 0] # Saturday, Sunday (0 = Sunday, per JS Date.getUTCDay() convention)
+illustrative: true
+source: "Representative subset of commonly observed Indian bank holidays; not sourced from an official RBI holiday calendar."
+as_of: "2026-01-01"
+holidays:
+  - date: "2026-01-26"
+    name: "Republic Day"
+  - date: "2026-03-04"
+    name: "Holi (sample)"
+  - date: "2026-08-15"
+    name: "Independence Day"
+  - date: "2026-10-02"
+    name: "Gandhi Jayanti"
+cutoffs:
+  inr_credit_processing:
+    local_time: "17:00"
+    note: "Illustrative AD-bank cut-off for same-day INR credit processing."

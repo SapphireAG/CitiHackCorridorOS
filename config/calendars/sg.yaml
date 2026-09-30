@@ -1,0 +1,22 @@
+# Singapore: business days, sample public holidays, and bank cut-off times (local SGT).
+# illustrative: true — a representative subset of holidays for demo purposes.
+country: SG
+timezone: "Asia/Singapore"
+utc_offset_minutes: 480 # +08:00, fixed offset — SGT does not observe DST
+weekend_days: [6, 0]
+illustrative: true
+source: "Representative subset of commonly observed Singapore bank holidays; not an official MAS/bank calendar."
+as_of: "2026-01-01"
+holidays:
+  - date: "2026-01-01"
+    name: "New Year's Day"
+  - date: "2026-02-17"
+    name: "Chinese New Year (sample)"
+  - date: "2026-08-09"
+    name: "National Day"
+  - date: "2026-12-25"
+    name: "Christmas Day"
+cutoffs:
+  outward_payment_initiation:
+    local_time: "19:00"
+    note: "Illustrative buyer-bank cut-off for same-day outward SGD payment initiation."

@@ -1,0 +1,27 @@
+# CLAUDE.md §13 — expected: COMPLIANCE_HOLD; no quotes generated until a human approves.
+# Buyer name ("Suspicious Review Holdings Pte Ltd") fuzzy-matches a bundled sample sanctions
+# entry above the configured threshold, so the compliance engine returns a REVIEW outcome,
+# which holds the workflow before any route is ever quoted (compliance is a gate — CLAUDE.md §2.4).
+name: "msme-sg-8l-sanctions-review"
+description: "Buyer name fuzzy-matches the sample sanctions list."
+submitted_at: "2026-01-06T05:30:00.000Z" # Tuesday 2026-01-06, 11:00 IST
+
+invoice:
+  invoice_number: "INV-SANC-0001"
+  exporter_id: "exp-0001"
+  buyer_id: "buy-0099" # Suspicious Review Holdings Pte Ltd — synthetic fixture entry
+  currency: "SGD"
+  total_minor: "1267000"
+  line_items:
+    - description: "Handcrafted wooden furniture set (SYNTHETIC)"
+      hs_code: "9403.60"
+      quantity: 1
+      unit_price_minor: "1267000"
+  invoice_date: "2026-01-01"
+  shipment_date: "2026-01-03"
+  purpose: "export_of_goods"
+
+auto_approve_compliance_hold: false
+
+expect:
+  final_state: "COMPLIANCE_HOLD"

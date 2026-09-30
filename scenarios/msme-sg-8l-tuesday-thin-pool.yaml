@@ -1,0 +1,33 @@
+# CLAUDE.md §13 — expected: CORRESPONDENT wins; the explanation names the liquidity reason.
+# Same invoice, an ordinary Tuesday mid-morning, but the tokenized liquidity pool is overridden
+# to be too thin for this order size given max_slippage_bps, so TOKENIZED is gated out on
+# eligibility (not on cost/time) and CORRESPONDENT is the only remaining candidate.
+name: "msme-sg-8l-tuesday-thin-pool"
+description: "Same invoice, Tuesday 11:00 IST, tokenized pool too thin (slippage > max)."
+submitted_at: "2026-01-06T05:30:00.000Z" # Tuesday 2026-01-06, 11:00 IST
+
+invoice:
+  invoice_number: "INV-TUE-0001"
+  exporter_id: "exp-0001"
+  buyer_id: "buy-0001"
+  currency: "SGD"
+  total_minor: "1267000"
+  line_items:
+    - description: "Handcrafted wooden furniture set (SYNTHETIC)"
+      hs_code: "9403.60"
+      quantity: 1
+      unit_price_minor: "1267000"
+  invoice_date: "2026-01-01"
+  shipment_date: "2026-01-03"
+  purpose: "export_of_goods"
+
+route_config_overrides:
+  tokenized:
+    liquidity_pool:
+      depth_minor:
+        amount: "5000000" # SGD 50,000.00 — deliberately thin relative to this order
+
+expect:
+  final_state: "AUDIT_SEALED"
+  winning_route: "CORRESPONDENT"
+  recon_matched: true

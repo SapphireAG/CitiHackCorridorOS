@@ -1,0 +1,13 @@
+# Minor-unit exponents per ISO 4217. Never assume 2 in code — always read this file.
+# source: ISO 4217 standard (public, stable reference — not a market data source)
+# as_of: "2026-01-01"
+currencies:
+  INR:
+    name: Indian Rupee
+    minor_unit_exponent: 2 # paise
+  SGD:
+    name: Singapore Dollar
+    minor_unit_exponent: 2 # cents
+  USD:
+    name: United States Dollar
+    minor_unit_exponent: 2 # cents
