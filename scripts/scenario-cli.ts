@@ -158,9 +158,12 @@ function printResult(scenario: ScenarioFile, result: WorkflowRunResult): boolean
 
     const auditDir = repoPath("out", "audit");
     mkdirSync(auditDir, { recursive: true });
+    // AUDIT_SEALED (always last) is emitted AFTER the bundle's chainHead is computed, so it is
+    // excluded here — the bundle attests to the chain as of just before sealing.
+    const chainEvents = result.events.filter((e) => e.type !== "AUDIT_SEALED");
     writeFileSync(
       join(auditDir, `${result.workflowId}.json`),
-      JSON.stringify(toPlainJson({ bundle: result.auditBundle, events: result.events }), null, 2),
+      JSON.stringify(toPlainJson({ bundle: result.auditBundle, events: chainEvents }), null, 2),
     );
     console.log(`  Scenario output: out/scenarios/${scenario.name}.json`);
     console.log(`  Audit bundle:    out/audit/${result.workflowId}.json`);

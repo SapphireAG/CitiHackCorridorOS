@@ -13,7 +13,7 @@
     "test:coverage": "vitest run --coverage",
     "scenario": "tsx scripts/scenario-cli.ts",
     "audit:verify": "tsx packages/audit/src/verify-cli.ts",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@corridoros/audit": "workspace:*",
